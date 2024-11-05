@@ -1,14 +1,14 @@
 import { Router } from "express";
-import Consultar from "../../repository/pedidos/pedidosRepository.js";
-import { Inserir } from "../../repository/pedidos/pedidosRepository.js";
-import { Alterar } from "../../repository/pedidos/pedidosRepository.js";
-import { Deletar } from "../../repository/pedidos/pedidosRepository.js";
+import Consultar from "../../repository/inventario/inventarioRepository.js";
+import { Inserir } from "../../repository/inventario/inventarioRepository.js";
+import { Deletar } from "../../repository/inventario/inventarioRepository.js";
+import { Alterar } from "../../repository/inventario/inventarioRepository.js";
 
 
-const endpoints = Router();
+const endpoints = Router()
 
 
-endpoints.get('/pedidos', async (req,resp) =>{
+endpoints.get('/inventario', async (req,resp) =>{
 
 try{
 
@@ -19,26 +19,24 @@ resp.status(400).send({erro: err.message})
 }
 })
 
-
-
-endpoints.post('/pedidos', async (req,resp) => {
+endpoints.post('/inventario', async (req,resp) => {
 
 try{
 
-let pedidos = req.body
-let id = await Inserir(pedidos)
+let item = req.body
+let id = await Inserir(item)
 resp.send({id:id})
 }catch(err){
 resp.status(400).send({erro: err.message})
 }
 })
 
-endpoints.put('/pedidos/:id', async (req,resp) =>{
+endpoints.put('/inventario/:id', async (req,resp) =>{
 
 try {
 let id = req.params.id
-let pedidos = req.body
-let linhas = await Alterar(id, pedidos)
+let item = req.body
+let linhas = await Alterar(id, item)
 
 if(linhas >= 1){
 resp.send() 
@@ -50,7 +48,9 @@ resp.status(400).send({erro: err.message})
 }
 })
 
-endpoints.delete('/pedidos/:id', async (req,resp) =>{
+
+
+endpoints.delete('/inventario/:id', async (req,resp) =>{
 
 try{
 let id = req.params.id
