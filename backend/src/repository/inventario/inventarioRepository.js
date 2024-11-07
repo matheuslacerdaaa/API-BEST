@@ -7,7 +7,7 @@ export default async function Consultar() {
         const comando = `
 
 select id_inventario  id,
-        nm_item  item,
+        nm_item  nome,
         ds_categoria    categoria,
         ds_dataadicionado  adicionado,
         nr_estoque   estoque,
