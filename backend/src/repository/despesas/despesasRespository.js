@@ -11,7 +11,8 @@ export default async function Consultar(){
             ds_descricao  descricao,
             nm_categoria   categoria,
             nm_responsavel  responsavel,
-            ds_pagamento pagamento
+            ds_pagamento pagamento,
+            ds_status   status
     from  tb_despesas
     `
     
@@ -28,12 +29,12 @@ export async function Inserir(despesa){
 const comando = `
 
 
-insert into tb_despesas(hr_horario,ds_preco, ds_descricao, nm_categoria, nm_responsavel, ds_pagamento)
-			values   (?,?,?,?,?,?); 
+insert into tb_despesas(hr_horario,ds_preco, ds_descricao, nm_categoria, nm_responsavel, ds_pagamento, ds_status)
+			values   (?,?,?,?,?,?,?); 
 `
 
 
-let resposta = await con.query(comando, [despesa.horario, despesa.preco, despesa.descricao, despesa.categoria,despesa.responsavel, despesa.pagamento])
+let resposta = await con.query(comando, [despesa.horario, despesa.preco, despesa.descricao, despesa.categoria,despesa.responsavel, despesa.pagamento, despesa.status])
 let registro = resposta[0]
 return registro.insertId
 }
@@ -49,7 +50,8 @@ export async function Alterar(id, despesa){
         ds_descricao = ?,
         nm_categoria = ?,
         nm_responsavel = ?,
-        ds_pagamento = ?
+        ds_pagamento = ?,
+        ds_status = ?
     where id_despesas = ?;    
     `
     

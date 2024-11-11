@@ -9,10 +9,11 @@ export async function inserirUsuario(pessoa) {
     
     let hash = crypto.SHA256(pessoa.senha).toString()
 
-    let resposta = await con.query(comando, [pessoa.nome, hash ])
+    let resposta = await con.query(comando, [pessoa.nome, hash]);
     let info = resposta[0];
     
     return info.insertId;
+    
 }
 
 export async function validarUsuario(pessoa) {

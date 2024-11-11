@@ -13,9 +13,13 @@ endpoints.post('/entrar/', async (req, resp) => {
         let pessoa = req.body;
 
         let usuario = await validarUsuario(pessoa);
+        console.log(usuario);
+    
 
-        if (usuario == null) {
-            resp.send({ erro: "Usuário ou senha incorreto(s)" })
+        if (usuario.nome == undefined) {
+            resp.send({
+                "token": "undefined"
+            })
         } else {
             let token = gerarToken(usuario);
             resp.send({

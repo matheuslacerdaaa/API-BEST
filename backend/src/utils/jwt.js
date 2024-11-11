@@ -1,22 +1,17 @@
 import jwt from 'jsonwebtoken'
 const KEY = '===!!bestburger!!=='
                   
-
-
-
-
 export function gerarToken(userInfo) {
   return jwt.sign(userInfo, KEY)
 }
 
+export function readToken(userInfo) {
+  return jwt.verify(userInfo, KEY)
+}
 
 export function autenticar(req, resp, next) {
   return autenticacao(req, resp, next);
 }
-
-
-
-
 
 export function autenticacao(req, resp, next) {
   try {
