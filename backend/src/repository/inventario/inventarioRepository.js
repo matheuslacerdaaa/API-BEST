@@ -12,7 +12,6 @@ select id_inventario  id,
         ds_dataadicionado  adicionado,
         nr_estoque   estoque,
         ds_datavalidade  validade,
-        ds_fornecedor fornecedor,
         ds_status    status
 from  tb_inventario
 `
@@ -26,10 +25,10 @@ from  tb_inventario
 export  async function Inserir(item) {
         const comando = `
      
-        insert into tb_inventario(nm_item, ds_categoria, ds_dataadicionado, nr_estoque, ds_datavalidade,ds_fornecedor, ds_status)
-			values   (?,?,?,?,?,?,?);
+        insert into tb_inventario(nm_item, ds_categoria, ds_dataadicionado, nr_estoque, ds_datavalidade, ds_status)
+			values   (?,?,?,?,?,?);
      `
-     let resposta = await con.query(comando, [item.nome, item.categoria, item.adicionado, item.estoque, item.validade, item.fornecedor, item.status])
+     let resposta = await con.query(comando, [item.nome, item.categoria, item.adicionado, item.estoque, item.validade, item.status])
 
      let registro = resposta[0]
 
@@ -47,13 +46,12 @@ export async function Alterar(id, item){
             ds_dataadicionado = ?,
             nr_estoque = ?,
             ds_datavalidade = ?,
-            ds_fornecedor = ?,
-            ds_status = ?    
+            ds_fornecedor = ? 
         where id_inventario= ?;    
         `
         
         
-    let resposta = await con.query(comando, [item.nome, item.categoria, item.adicionado, item.estoque, item.validade, item.fornecedor, item.status, id])
+    let resposta = await con.query(comando, [item.nome, item.categoria, item.adicionado, item.estoque, item.validade, item.fornecedor, id])
         let registro = resposta[0]
         
     return registro.affectedRows
