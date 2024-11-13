@@ -45,13 +45,12 @@ export async function Alterar(id, item){
             ds_categoria = ?,
             ds_dataadicionado = ?,
             nr_estoque = ?,
-            ds_datavalidade = ?,
-            ds_fornecedor = ? 
+            ds_datavalidade = ?
         where id_inventario= ?;    
         `
         
         
-    let resposta = await con.query(comando, [item.nome, item.categoria, item.adicionado, item.estoque, item.validade, item.fornecedor, id])
+    let resposta = await con.query(comando, [item.nome, item.categoria, item.adicionado, item.estoque, item.validade, id])
         let registro = resposta[0]
         
     return registro.affectedRows
