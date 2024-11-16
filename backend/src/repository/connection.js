@@ -3,10 +3,10 @@ import 'dotenv/config'
 
 const con = await mysql.createConnection({
 
-host: 'localhost',
-user: 'admin',
-password: '@dm!n',
-database: 'bestburgers'
+host: process.env.HOST,
+user: process.env.USER,
+password: process.env.PWD,
+database: process.env.DB
 })
 
 console.log('--> DB <--');
