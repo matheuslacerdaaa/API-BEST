@@ -7,29 +7,27 @@ export default async function Consultar() {
         const comando = `
 
 select id_inventario  id,
-        nm_item  nome,
-        ds_categoria    categoria,
-        ds_dataadicionado  adicionado,
-        nr_estoque   estoque,
-        ds_datavalidade  validade,
-        ds_status    status
+        ds_entrada  entrada,
+        ds_descricao    descricao,
+        nm_nota  nota,
+        ds_validade   validade,
+        ds_quantidade  quantidade,
+        ds_valor    valor
 from  tb_inventario
 `
 
-        let resposta = await con.query(comando)
-        let registro = resposta[0]
-
-        return registro
-}
+let resposta = await con.query(comando)
+let registro = resposta[0]
+return registro
+}       
 
 export  async function Inserir(item) {
         const comando = `
      
-        insert into tb_inventario(nm_item, ds_categoria, ds_dataadicionado, nr_estoque, ds_datavalidade, ds_status)
+        insert into tb_inventario(ds_entrada, ds_descricao, nm_nota, ds_validade, ds_quantidade, ds_valor)
 			values   (?,?,?,?,?,?);
      `
-     let resposta = await con.query(comando, [item.nome, item.categoria, item.adicionado, item.estoque, item.validade, item.status])
-
+     let resposta = await con.query(comando, [item.entrada, item.descricao, item.nota, item.validade, item.quantidade, item.valor])
      let registro = resposta[0]
 
      return registro.insertId
@@ -41,18 +39,19 @@ export async function Alterar(id, item){
         const comando = `
         
         update tb_inventario
-        set nm_item = ?,
-            ds_categoria = ?,
-            ds_dataadicionado = ?,
-            nr_estoque = ?,
-            ds_datavalidade = ?
+        set ds_entrada = ?,
+            ds_descricao = ?,
+            nm_nota = ?,
+            ds_validade = ?,
+            ds_quantidade = ?,
+            ds_valor = ?
         where id_inventario= ?;    
         `
         
         
-    let resposta = await con.query(comando, [item.nome, item.categoria, item.adicionado, item.estoque, item.validade, id])
+        let resposta = await con.query(comando, [item.entrada, item.descricao, item.nota, item.validade, item.quantidade, item.valor, id])
         let registro = resposta[0]
-        
+   
     return registro.affectedRows
 }
 
