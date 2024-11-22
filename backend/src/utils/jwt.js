@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-const KEY = '===!!bestburger!!=='
+const KEY = 'ZH4K-QBE2-LAY3'
                   
 export function gerarToken(userInfo) {
   return jwt.sign(userInfo, KEY)
